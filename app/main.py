@@ -1,0 +1,28 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.api.router import router
+from app.config import get_settings
+
+
+def get_application() -> FastAPI:
+    settings = get_settings()
+
+    application = FastAPI(**settings.model_dump())
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.allowed_hosts,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # application.exception_handler(HTTPException)(http_exception_handler)
+    # application.exception_handler(RequestValidationError)(validation_exception_handler)
+
+    application.include_router(router)
+
+    return application
+
+
+app = get_application()
