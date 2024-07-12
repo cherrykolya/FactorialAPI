@@ -1,0 +1,47 @@
+repos:
+  # default built-in pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        language: system
+        require_serial: true
+        entry: poetry run ruff check
+        types_or: [ python, pyi ]
+        args: [ '--force-exclude' ]
+
+      - id: isort
+        name: isort
+        language: system
+        entry: poetry run isort
+        require_serial: true
+        types_or: [ cython, pyi, python ]
+        args: [ '--filter-files', '--profile', 'black' ]
+
+      - id: black
+        name: black
+        language: system
+        entry: poetry run black
+        require_serial: true
+        types_or: [ python, pyi ]
+
+      - id: commitizen
+        name: commitizen check
+        description: >
+          Check whether the current commit message follows commiting rules. Allow
+          empty commit messages by default, because they typically indicate to Git
+          that the commit should be aborted.
+        entry: poetry run cz check
+        args: [--allow-abort, --commit-msg-file]
+        stages: [commit-msg]
+        language: python
+        language_version: python3
+        pass_filenames: false
+        always_run: true
