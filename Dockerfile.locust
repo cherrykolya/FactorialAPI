@@ -1,0 +1,21 @@
+# Dockerfile for Locust
+FROM python:3.11-slim
+
+# Install Poetry
+RUN pip install poetry
+
+# Set the working directory
+WORKDIR /locust
+
+# Copy the pyproject.toml and poetry.lock files
+COPY pyproject.toml poetry.lock ./
+
+# Install dependencies
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi
+
+# Copy the Locust test file
+COPY stress_test/locustfile.py /locust
+
+# Command to run Locust
+CMD ["locust", "-f", "/locust/locustfile.py", "--host=http://fastapi:80"]

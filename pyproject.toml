@@ -10,6 +10,7 @@ packages = [{include = "app"}]
 python = "^3.11"
 fastapi = "^0.111.0"
 pydantic-settings = "^2.3.4"
+locust = "^2.29.1"
 
 
 [tool.poetry.group.test.dependencies]
