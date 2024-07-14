@@ -14,8 +14,6 @@ class AppSettings(BaseSettings):
     version: str = "0.0.0"
     allowed_hosts: list[str] = ["*"]
 
-    CACHE_WARM_LIMIT: int = 100
-
 
 @lru_cache
 def get_settings() -> AppSettings:

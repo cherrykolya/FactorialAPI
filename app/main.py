@@ -18,9 +18,6 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    # application.exception_handler(HTTPException)(http_exception_handler)
-    # application.exception_handler(RequestValidationError)(validation_exception_handler)
-
     application.include_router(router)
 
     return application

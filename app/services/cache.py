@@ -49,7 +49,7 @@ class CacheService:
                 for i in range(self.data.max_key + 1, key + 1):
                     self.data[i] = self.data[i - 1] * i
 
-    def start(self, n: int = 1_000):
+    def start(self, n: int = 100):
         """Прогрев кэша"""
         self.set(n)
 
