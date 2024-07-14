@@ -8,7 +8,7 @@ router = APIRouter(tags=["Factorial"])
 
 
 @router.get("/factorial")
-def factorial(n: int = Query(lt=10_000), cache_service: CacheServiceInterface = Depends(get_cache_service)) -> Any:
+def factorial(n: int = Query(le=10_000), cache_service: CacheServiceInterface = Depends(get_cache_service)) -> Any:
     if value := cache_service.get(n):
         return {"value": str(value)}
 
@@ -18,6 +18,6 @@ def factorial(n: int = Query(lt=10_000), cache_service: CacheServiceInterface = 
 
 @router.get("/factorial-threadsafe")
 def factorial_threadsafe(
-    n: int = Query(lt=10_000), cache_service: CacheServiceInterface = Depends(get_cache_service)
+    n: int = Query(le=10_000), cache_service: CacheServiceInterface = Depends(get_cache_service)
 ) -> Any:
     return {"value": cache_service.get(n)}
