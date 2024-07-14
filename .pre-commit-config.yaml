@@ -15,7 +15,7 @@ repos:
         require_serial: true
         entry: poetry run ruff check
         types_or: [ python, pyi ]
-        args: [ '--force-exclude' ]
+        args: [ '--force-exclude', '--fix' ]
 
       - id: isort
         name: isort
