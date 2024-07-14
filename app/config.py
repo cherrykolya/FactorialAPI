@@ -10,7 +10,7 @@ class AppSettings(BaseSettings):
     openapi_prefix: str = ""
     openapi_url: str = "/openapi.json"
     redoc_url: str = "/redoc"
-    title: str = "FastAPI example application"
+    title: str = "Factorial API application"
     version: str = "0.0.0"
     allowed_hosts: list[str] = ["*"]
 
