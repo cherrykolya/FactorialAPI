@@ -18,3 +18,6 @@ async def lifespan(app: FastAPI):
     # прогрев кэша
     cache_service.start(settings.CACHE_WARM_LIMIT)
     yield
+
+    # gracefull shutdown
+    cache_service.stop()
